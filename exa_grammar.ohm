@@ -1,0 +1,90 @@
+EXAScript {
+
+    Program = Instruction*
+
+    Instruction = CopyInstr
+                    | AddInstr
+                    | SwizInstr
+                    | MarkInstr
+                    | JumpInstr
+                    | TJumpInstr
+                    | FJumpInstr
+                    | TestInstr
+                    | ReplInstr
+                    | HaltInstr
+                    | KillInstr
+                    | LinkInstr
+                    | HostInstr
+                    | ModeInstr
+                    | VoidInstr
+                    | MakeInstr
+                    | GrabInstr
+                    | FileInstr
+                    | SeekInstr
+                    | DropInstr
+                    | WipeInstr
+                    | NoopInstr
+                    | NoteInstr
+                    | RandInstr
+
+    Register = GeneralRegister
+             | TestRegister
+             | FileRegister
+             | MessageRegister
+
+    Number = "-" digit4 -- negative
+           |     digit4 -- positive
+
+    // there must be a better way to do this
+    digit4 = digit digit? digit? digit? space?
+
+    GeneralRegister = "X"
+    TestRegister = "T"
+    FileRegister = "F"
+    MessageRegister = "M"
+
+
+
+    Parameter = Register | Number
+    label = alnum+ newline
+    newline = "\n" | "\r\n"
+    TestSubChars = "<" | "=" | ">"
+
+
+    CopyInstr = "COPY" Parameter Register // works
+    AddInstr = "ADDI" Parameter Parameter Parameter
+    SwizInstr = "SWIZ" Parameter Parameter Register
+
+    MarkInstr = "MARK" label
+    JumpInstr = "JUMP" label
+    TJumpInstr = "TJMP" label
+    FJumpInstr = "FJMP" label
+
+    TestInstr = "TEST" Parameter TestSubChars Parameter -- value
+              | "TEST" "MRD" -- comm
+              | "TEST" "EOF" -- file
+
+    ReplInstr = "REPL" label
+    HaltInstr = "HALT"
+    KillInstr = "KILL"
+
+    LinkInstr = "LINK" Parameter
+    HostInstr = "HOST" Register
+
+    ModeInstr = "MODE"
+    VoidInstr = "VOID" MessageRegister
+              | "VOID" FileRegister
+
+    MakeInstr = "MAKE"
+    GrabInstr = "GRAB" Parameter
+    FileInstr = "FILE" Register
+    SeekInstr = "SEEK" Parameter
+    DropInstr = "DROP"
+    WipeInstr = "WIPE"
+
+    NoopInstr = "NOOP"
+    NoteInstr = "NOTE" alnum*
+    RandInstr = "RAND" Parameter Parameter Register
+
+
+}
