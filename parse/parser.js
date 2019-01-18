@@ -2,7 +2,14 @@
 const fs = require('fs');
 const ohm = require('ohm-js');
 const path = require('path');
-const assert = require("assert");
+
+
+
+function validateLine(line) {
+    let lineLengthCheckIsValid = line.length() <= 24;
+    // todo add other checks here
+    return lineLengthIsValid;
+}
 
 
 let grammarFile = fs.readFileSync(path.join(__dirname, './exa_grammar.ohm'));
@@ -10,7 +17,7 @@ let EXA_GRAMMAR = ohm.grammar(grammarFile.toString());
 
 let EXACUTOR = EXA_GRAMMAR.createSemantics();
 EXACUTOR.addOperation('exec',{
-    
+
 });
 
 
