@@ -1,14 +1,7 @@
 'use strict';
-const exa_parser = require('./parse/parser');
 
 
-class EXASIM {
-    private EXA_LIST: EXA[];
+let SIM = new EXASIM();
 
-    constructor() {
-        this.EXA_LIST = [];
-    }
-
-
-}
+SIM.simulate();
 

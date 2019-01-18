@@ -32,7 +32,7 @@ EXAScript {
              | FileRegister
              | MessageRegister
 
-    Number = "-" digit4 -- negative
+    EXANumber = "-" digit4 -- negative
            |     digit4 -- positive
 
     // there must be a better way to do this
@@ -45,7 +45,7 @@ EXAScript {
 
 
 
-    Parameter = Register | Number
+    Parameter = Register | EXANumber
     label = alnum+ newline
     newline = "\n" | "\r\n"
     TestSubChars = "<" | "=" | ">"
