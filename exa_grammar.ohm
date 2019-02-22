@@ -24,7 +24,7 @@ EXAScript {
                     | DropInstr
                     | WipeInstr
                     | NoopInstr
-                    | NoteInstr
+                    | noteInstr
                     | RandInstr
 
     Register = GeneralRegister
@@ -49,6 +49,7 @@ EXAScript {
     label = alnum+ newline
     newline = "\n" | "\r\n"
     TestSubChars = "<" | "=" | ">"
+    validString = space? alnum* newline?
 
 
     CopyInstr = "COPY" Parameter Register // works
@@ -83,8 +84,7 @@ EXAScript {
     WipeInstr = "WIPE"
 
     NoopInstr = "NOOP"
-    NoteInstr = "NOTE" alnum*
+    noteInstr = "NOTE" validString
     RandInstr = "RAND" Parameter Parameter Register
-
 
 }
