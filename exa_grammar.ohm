@@ -31,6 +31,7 @@ EXAScript {
              | TestRegister
              | FileRegister
              | MessageRegister
+             | HardwareRegister
 
     EXANumber = "-" digit4 -- negative
            |     digit4 -- positive
@@ -42,6 +43,7 @@ EXAScript {
     TestRegister = "T"
     FileRegister = "F"
     MessageRegister = "M"
+    HardwareRegister = "#" validString
 
 
 
@@ -86,5 +88,6 @@ EXAScript {
     NoopInstr = "NOOP"
     noteInstr = "NOTE" validString
     RandInstr = "RAND" Parameter Parameter Register
+
 
 }
