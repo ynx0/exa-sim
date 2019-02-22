@@ -57,7 +57,7 @@ EXAScript {
     newline = "\n" | "\r\n"
     TestSubChars = "<" | "=" | ">"
     validString = space? (alnum | "_")* newline?
-
+	validNoteString = space? (alnum | "_" | space)* newline?
 
     CopyInstr = "COPY" Parameter Register // works
     AddInstr = "ADDI" Parameter Parameter Parameter
@@ -96,7 +96,7 @@ EXAScript {
 	
     // Auxilary Instructions
     NoopInstr = "NOOP"
-    noteInstr = "NOTE" validString
+    noteInstr = "NOTE" validNoteString
     RandInstr = "RAND" Parameter Parameter Register
 	
     // Arithmetic
