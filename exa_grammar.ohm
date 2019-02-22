@@ -26,6 +26,10 @@ EXAScript {
                     | NoopInstr
                     | noteInstr
                     | RandInstr
+                    | AddInstruction
+                    | SubtractInstruction
+                    | MultiplyInstruction
+                    | DivideInstruction
 
     Register = GeneralRegister
              | TestRegister
@@ -48,16 +52,16 @@ EXAScript {
 
 
     Parameter = Register | EXANumber
-    label = alnum+ newline
+    label = validString //alnum+ newline
     newline = "\n" | "\r\n"
     TestSubChars = "<" | "=" | ">"
-    validString = space? alnum* newline?
+    validString = space? (alnum | "_")* newline?
 
 
     CopyInstr = "COPY" Parameter Register // works
     AddInstr = "ADDI" Parameter Parameter Parameter
     SwizInstr = "SWIZ" Parameter Parameter Register
-
+    
     MarkInstr = "MARK" label
     JumpInstr = "JUMP" label
     TJumpInstr = "TJMP" label
@@ -66,28 +70,39 @@ EXAScript {
     TestInstr = "TEST" Parameter TestSubChars Parameter -- value
               | "TEST" "MRD" -- comm
               | "TEST" "EOF" -- file
-
+	
+    // Interaction with other EXAs
     ReplInstr = "REPL" label
     HaltInstr = "HALT"
     KillInstr = "KILL"
-
+	
+    // Exa Movement and Host Inters
     LinkInstr = "LINK" Parameter
     HostInstr = "HOST" Register
-
+	
+    // EXA State Instructions
     ModeInstr = "MODE"
     VoidInstr = "VOID" MessageRegister
               | "VOID" FileRegister
-
+	
+    // File Instructions
     MakeInstr = "MAKE"
     GrabInstr = "GRAB" Parameter
     FileInstr = "FILE" Register
     SeekInstr = "SEEK" Parameter
     DropInstr = "DROP"
     WipeInstr = "WIPE"
-
+	
+    // Auxilary Instructions
     NoopInstr = "NOOP"
     noteInstr = "NOTE" validString
     RandInstr = "RAND" Parameter Parameter Register
-
+	
+    // Arithmetic
+    AddInstruction = "ADDI" Parameter Parameter Register
+    SubtractInstruction = "SUBI" Parameter Parameter Register
+    MultiplyInstruction = "MULI"  Parameter Parameter Register
+    DivideInstruction = "DIVI" Parameter Parameter Register
+    
 
 }
