@@ -54,11 +54,13 @@ EXAScript {
 
     Parameter = Register | EXANumber
     label = validString //alnum+ newline
-    newline = "\n" | "\r\n"
+    newline = "\n"
     TestSubChars = "<" | "=" | ">"
-    validString = space? (alnum | "_")* newline?
-	validNoteString = space? (alnum | "_" | space)* newline?
-
+    onlySpace = " " // todo make a more elegant solution to this
+    validString = onlySpace? (alnum | "_")* newline?
+    // apparently in ohm space is any whitespace not " " so i got messed up real bad
+	validNoteString = onlySpace? (alnum | "_" | onlySpace)*
+    
     CopyInstr = "COPY" Parameter Register // works
     AddInstr = "ADDI" Parameter Parameter Parameter
     SwizInstr = "SWIZ" Parameter Parameter Register
